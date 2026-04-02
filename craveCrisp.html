@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crave Crisp : FOR COOKIES AND CAKE</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #fff5f5;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      color: white;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 40px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: slideUp 0.6s forwards;
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 15px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #ff6b6b;
+      margin-top: 10px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #ffe3e3;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Crave Crisp 🍪</h1>
+  <p>Homemade Cookies & Muffins baked with love</p>
+</header>
+
+<section class="products" id="productContainer"></section>
+
+<footer>
+  <p>© 2026 Sweet Treats</p>
+</footer>
+
+<script>
+  const products = [
+    {
+      title: "Chocolate Chip Cookies",
+      description: "Freshly baked cookies loaded with chocolate chips.",
+      price: "₹199",
+      image: "https://images.unsplash.com/photo-1606312619070-d48b4c652a52"
+    },
+    {
+      title: "Blueberry Muffins",
+      description: "Soft muffins bursting with fresh blueberries.",
+      price: "₹149",
+      image: "https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b"
+    },
+    {
+      title: "Oatmeal Cookies",
+      description: "Healthy and tasty oatmeal cookies with raisins.",
+      price: "₹179",
+      image: "https://images.unsplash.com/photo-1599785209707-28d2c3c9cba2"
+    },
+    {
+      title: "Chocolate Muffins",
+      description: "Rich and moist chocolate muffins for chocoholics.",
+      price: "₹159",
+      image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c"
+    }
+  ];
+
+  const container = document.getElementById('productContainer');
+
+  products.forEach((product, index) => {
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.style.animationDelay = `${index * 0.2}s`;
+
+    card.innerHTML = `
+      <img src="${product.image}" alt="${product.title}" />
+      <div class="card-content">
+        <h3>${product.title}</h3>
+        <p>${product.description}</p>
+        <div class="price">${product.price}</div>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+</script>
+
+</body>
+</html>
