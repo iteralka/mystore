@@ -3,146 +3,1030 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crave Crisp : FOR COOKIES AND CAKE</title>
+  <title>Bakersmom — Homemade Cookies & Cakes | bakersmom.com</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #e8756a;
+      --primary-light: #f5a49f;
+      --accent: #f7c59f;
+      --cream: #fff8f3;
+      --card-bg: #ffffff;
+      --text: #3d2c2c;
+      --muted: #8a6f6f;
+      --border: #f0ddd8;
+    }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: #fff5f5;
+      background: var(--cream);
+      color: var(--text);
     }
 
-    header {
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 248, 243, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--primary); }
+
+    .nav-order-btn {
+      background: var(--primary);
+      color: white !important;
+      padding: 8px 18px;
+      border-radius: 50px;
+    }
+
+    .nav-order-btn:hover { background: #d46156!important; color: white !important; }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      padding: 40px;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      color: white;
-      animation: fadeIn 1.5s ease-in-out;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 40px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 60px 24px;
+      background: linear-gradient(135deg, #ffe4e1 0%, #fff0e8 50%, #fce4ec 100%);
+      position: relative;
       overflow: hidden;
-      transform: translateY(20px);
-      opacity: 0;
-      animation: slideUp 0.6s forwards;
     }
 
-    .card img {
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(232,117,106,0.12) 0%, transparent 70%);
+      top: -100px;
+      right: -100px;
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(247,197,159,0.15) 0%, transparent 70%);
+      bottom: -80px;
+      left: -80px;
+      border-radius: 50%;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 700px; }
+
+    .hero-badge {
+      display: inline-block;
+      background: white;
+      color: var(--primary);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 50px;
+      border: 1px solid var(--primary-light);
+      margin-bottom: 20px;
+      animation: fadeDown 0.8s ease both;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 20px;
+      animation: fadeDown 0.8s 0.1s ease both;
+    }
+
+    .hero h1 span { color: var(--primary); }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      animation: fadeDown 0.8s 0.2s ease both;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeDown 0.8s 0.3s ease both;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 14px rgba(232,117,106,0.35);
+    }
+
+    .btn-primary:hover {
+      background: #d46156;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(232,117,106,0.45);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      border: 2px solid var(--border);
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      margin-top: 56px;
+      flex-wrap: wrap;
+      animation: fadeDown 0.8s 0.4s ease both;
+    }
+
+    .stat { text-align: center; }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+    /* ── SECTIONS SHARED ── */
+    section { padding: 80px 24px; }
+
+    .section-tag {
+      display: inline-block;
+      background: rgba(232,117,106,0.1);
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 540px;
+    }
+
+    .section-header { margin-bottom: 48px; }
+    .section-header.center { text-align: center; }
+    .section-header.center .section-sub { margin: 0 auto; }
+
+    /* ── ABOUT ── */
+    .about { background: white; }
+
+    .about-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .about-image-wrap {
+      position: relative;
+    }
+
+    .about-image-wrap img {
       width: 100%;
-      height: 200px;
+      border-radius: 20px;
       object-fit: cover;
+      height: 460px;
+      box-shadow: 0 20px 50px rgba(232,117,106,0.18);
     }
 
-    .card-content {
-      padding: 15px;
+    .about-float-card {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      background: white;
+      border-radius: 16px;
+      padding: 16px 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    .card h3 {
-      margin: 0 0 10px;
+    .about-float-card .icon { font-size: 2rem; }
+
+    .about-float-card .float-text { font-size: 0.8rem; color: var(--muted); }
+    .about-float-card .float-text strong { display: block; color: var(--text); font-size: 0.95rem; }
+
+    .about-content .section-sub { max-width: 100%; margin-bottom: 24px; }
+
+    .about-values {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
     }
 
-    .card p {
+    .value-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .value-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(232,117,106,0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .value-text strong { display: block; font-size: 0.875rem; color: var(--text); margin-bottom: 2px; }
+    .value-text span { font-size: 0.8rem; color: var(--muted); }
+
+    /* ── MENU ── */
+    .menu { background: var(--cream); }
+
+    .products-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    .product-card.visible {
+      animation: slideUp 0.5s ease forwards;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(232,117,106,0.18);
+    }
+
+    .product-img-wrap { position: relative; overflow: hidden; }
+
+    .product-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s;
+    }
+
+    .product-card:hover img { transform: scale(1.06); }
+
+    .product-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: var(--primary);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 50px;
+    }
+
+    .product-body { padding: 20px; }
+
+    .product-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .product-body p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 16px;
+    }
+
+    .product-price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .product-order-btn {
+      background: rgba(232,117,106,0.1);
+      color: var(--primary);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .product-order-btn:hover { background: var(--primary); color: white; }
+
+    /* ── HOW TO ORDER ── */
+    .how-to-order { background: white; }
+
+    .steps-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      position: relative;
+    }
+
+    .steps-wrap::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: calc(16.66% + 16px);
+      right: calc(16.66% + 16px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-light), var(--accent));
+      z-index: 0;
+    }
+
+    .step { text-align: center; position: relative; z-index: 1; }
+
+    .step-num {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 6px 18px rgba(232,117,106,0.3);
+    }
+
+    .step h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .step p { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
+
+    .order-cta {
+      text-align: center;
+      margin-top: 52px;
+    }
+
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25D366;
+      color: white;
+      padding: 16px 36px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 6px 20px rgba(37,211,102,0.35);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-whatsapp:hover {
+      background: #1da851;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37,211,102,0.45);
+    }
+
+    .btn-whatsapp svg { width: 22px; height: 22px; fill: white; }
+
+    /* ── CONTACT ── */
+    .contact { background: var(--cream); }
+
+    .contact-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .contact-info { }
+
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      background: white;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      flex-shrink: 0;
+    }
+
+    .contact-detail-text strong { display: block; font-size: 0.875rem; color: var(--text); margin-bottom: 2px; }
+    .contact-detail-text span { font-size: 0.85rem; color: var(--muted); }
+
+    .contact-form {
+      background: white;
+      border-radius: 20px;
+      padding: 36px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+
+    .contact-form h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+
+    .form-group { margin-bottom: 18px; }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+      letter-spacing: 0.3px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 11px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.875rem;
+      color: var(--text);
+      background: var(--cream);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(232,117,106,0.12);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 110px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 4px;
+    }
+
+    .btn-submit:hover { background: #d4615e; transform: translateY(-1px); }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 24px;
+      color: #2d7a4f;
+      background: #e6f6ed;
+      border-radius: 10px;
+      margin-top: 16px;
       font-size: 0.9rem;
-      color: #555;
     }
 
-    .price {
-      font-weight: bold;
-      color: #ff6b6b;
-      margin-top: 10px;
+    /* ── FOOTER ── */
+    footer {
+      background: #2c1f1f;
+      color: #c9a9a9;
+      padding: 48px 24px 28px;
+      text-align: center;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-light);
+      margin-bottom: 8px;
+    }
+
+    footer p { font-size: 0.875rem; margin-bottom: 4px; }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #c9a9a9;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--primary-light); }
+
+    .footer-copy {
+      border-top: 1px solid #3d2c2c;
+      padding-top: 20px;
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: #7a5a5a;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-18px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes slideUp {
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #ffe3e3;
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--cream); border-bottom: 1px solid var(--border); padding: 16px 20px; gap: 16px; }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+
+      .about-inner { grid-template-columns: 1fr; gap: 32px; }
+      .about-image-wrap img { height: 300px; }
+      .about-float-card { right: 10px; bottom: -14px; }
+      .about-values { grid-template-columns: 1fr; }
+
+      .steps-wrap { grid-template-columns: 1fr; gap: 24px; }
+      .steps-wrap::before { display: none; }
+
+      .contact-inner { grid-template-columns: 1fr; }
+
+      .form-row { grid-template-columns: 1fr; }
+
+      .hero-stats { gap: 24px; }
+    }
+
+    @media (max-width: 480px) {
+      section { padding: 56px 16px; }
+      .contact-form { padding: 24px 18px; }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Crave Crisp 🍪</h1>
-  <p>Homemade Cookies & Muffins baked with love</p>
-</header>
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">Bakersmom 🍪</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#how-to-order">How to Order</a></li>
+    <li><a href="#contact" class="nav-order-btn">Order Now</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-<section class="products" id="productContainer"></section>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <span class="hero-badge">🏡 Baked Fresh at Home</span>
+    <h1>Made with <span>Love</span>,<br>Baked with <span>Care</span></h1>
+    <p>Artisan cookies, muffins, and cakes crafted in small batches — so every bite is warm, personal, and delicious.</p>
+    <div class="hero-buttons">
+      <a href="#menu" class="btn-primary">Explore Menu</a>
+      <a href="#how-to-order" class="btn-outline">How to Order</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Home Baked</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4+</div>
+        <div class="stat-label">Signature Items</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">❤️</div>
+        <div class="stat-label">Made with Love</div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-image-wrap">
+      <img src="https://images.unsplash.com/photo-1556909114-44e3e70034e2?w=600&q=80" alt="Home baking" loading="lazy" />
+      <div class="about-float-card">
+        <div class="icon">🍪</div>
+        <div class="float-text">
+          <strong>Small Batches</strong>
+          Fresh & made to order
+        </div>
+      </div>
+    </div>
+    <div class="about-content">
+      <span class="section-tag">Our Story</span>
+      <h2 class="section-title">A Home Kitchen Full of Sweet Memories</h2>
+      <p class="section-sub">What started as baking for family and friends turned into a passion I couldn't keep to myself. Every recipe I bake is inspired by warmth, comfort, and the simple joy of sharing something delicious.</p>
+      <p class="section-sub" style="margin-top:12px;">I bake in small batches so nothing is mass-produced — your order is always fresh, personal, and made just for you.</p>
+      <div class="about-values">
+        <div class="value-item">
+          <div class="value-icon">🌿</div>
+          <div class="value-text">
+            <strong>Fresh Ingredients</strong>
+            <span>No preservatives, ever</span>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🏠</div>
+          <div class="value-text">
+            <strong>Home Baked</strong>
+            <span>Made in my own kitchen</span>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">📦</div>
+          <div class="value-text">
+            <strong>Custom Orders</strong>
+            <span>Tailored to your needs</span>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">💌</div>
+          <div class="value-text">
+            <strong>Made with Love</strong>
+            <span>Every single time</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="section-header center">
+    <span class="section-tag">Our Treats</span>
+    <h2 class="section-title">Our Signature Menu</h2>
+    <p class="section-sub">Each item is baked fresh and packed with flavour. All prices are per pack unless noted.</p>
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- HOW TO ORDER -->
+<section class="how-to-order" id="how-to-order">
+  <div class="section-header center">
+    <span class="section-tag">Ordering</span>
+    <h2 class="section-title">How to Place an Order</h2>
+    <p class="section-sub">It's super simple! Just follow these three steps and your goodies will be on their way.</p>
+  </div>
+  <div class="steps-wrap">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Browse the Menu</h3>
+      <p>Check out our treats above and decide what you'd love. Custom flavours and quantities are welcome!</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Message on WhatsApp</h3>
+      <p>Send us a WhatsApp message with your item, quantity, and preferred delivery date. We'll confirm availability.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Receive & Enjoy</h3>
+      <p>Pick up your order or arrange delivery. Pay on delivery. Then sit back and enjoy every bite!</p>
+    </div>
+  </div>
+  <div class="order-cta">
+    <a href="https://wa.me/917827154443?text=Hi%21%20I%27d%20like%20to%20place%20an%20order%20from%20Bakersmom%20%F0%9F%8D%9E" class="btn-whatsapp" target="_blank" rel="noopener" id="whatsappBtn">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Order on WhatsApp
+    </a>
+    <p style="margin-top:16px; font-size:0.85rem; color:var(--muted);">Minimum order: ₹199 · Delivery available nearby · Advance booking recommended</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-header center">
+    <span class="section-tag">Get in Touch</span>
+    <h2 class="section-title">Place a Custom Order</h2>
+    <p class="section-sub">Have a special request or want a bulk order? Send us a message and we'll get back to you!</p>
+  </div>
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div class="contact-detail">
+        <div class="contact-icon">📱</div>
+        <div class="contact-detail-text">
+          <strong>WhatsApp</strong>
+          <span>+91 78271 54443</span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">🕐</div>
+        <div class="contact-detail-text">
+          <strong>Order Lead Time</strong>
+          <span>1–2 days in advance</span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">📍</div>
+        <div class="contact-detail-text">
+          <strong>Location</strong>
+          <span>Home delivery &amp; pickup available</span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">💳</div>
+        <div class="contact-detail-text">
+          <strong>Payment</strong>
+          <span>UPI / Cash on delivery</span>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">📸</div>
+        <div class="contact-detail-text">
+          <strong>Instagram</strong>
+          <a href="https://www.instagram.com/cookbook_withlove" target="_blank" rel="noopener" style="color:var(--primary);text-decoration:none;font-size:0.85rem;">@cookbook_withlove</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <h3>Send an Enquiry</h3>
+      <form id="orderForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" placeholder="Priya Sharma" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="+91 98765 43210" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="item">What would you like to order?</label>
+          <select id="item" required>
+            <option value="">— Select an item —</option>
+            <option>Chocolate Chip Cookies</option>
+            <option>Blueberry Muffins</option>
+            <option>Oatmeal Cookies</option>
+            <option>Chocolate Muffins</option>
+            <option>Custom / Multiple Items</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Additional details (quantity, date, special requests)</label>
+          <textarea id="message" placeholder="E.g. I'd like 2 boxes of cookies for this Saturday..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Send Enquiry 🍪</button>
+        <div class="form-success" id="formSuccess">
+          ✅ Thank you! We'll reach out on WhatsApp shortly.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <p>© 2026 Sweet Treats</p>
+  <div class="footer-logo">Bakersmom 🍪</div>
+  <p>Homemade Cookies &amp; Cakes baked with love</p>
+  <div class="footer-links">
+    <a href="#home">Home</a>
+    <a href="#about">Our Story</a>
+    <a href="#menu">Menu</a>
+    <a href="#how-to-order">How to Order</a>
+    <a href="#contact">Contact</a>
+    <a href="https://www.instagram.com/cookbook_withlove" target="_blank" rel="noopener">📸 Instagram</a>
+  </div>
+  <div class="footer-copy">
+    <p>© 2026 Bakersmom. All rights reserved.</p>
+  </div>
 </footer>
 
 <script>
+  // ── Products data ──
   const products = [
     {
       title: "Chocolate Chip Cookies",
-      description: "Freshly baked cookies loaded with chocolate chips.",
+      description: "Freshly baked cookies loaded with chocolate chips. Crispy edges, chewy centre.",
       price: "₹199",
-      image: "https://images.unsplash.com/photo-1606312619070-d48b4c652a52"
+      badge: "Best Seller",
+      image: "https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=500&q=80"
     },
     {
       title: "Blueberry Muffins",
-      description: "Soft muffins bursting with fresh blueberries.",
+      description: "Soft, fluffy muffins bursting with fresh blueberries and a golden top.",
       price: "₹149",
-      image: "https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b"
+      badge: "Fan Favourite",
+      image: "https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?w=500&q=80"
     },
     {
       title: "Oatmeal Cookies",
-      description: "Healthy and tasty oatmeal cookies with raisins.",
+      description: "Wholesome oatmeal cookies with plump raisins. Healthy never tasted this good.",
       price: "₹179",
-      image: "https://images.unsplash.com/photo-1599785209707-28d2c3c9cba2"
+      badge: "",
+      image: "https://images.unsplash.com/photo-1599785209707-28d2c3c9cba2?w=500&q=80"
     },
     {
       title: "Chocolate Muffins",
-      description: "Rich and moist chocolate muffins for chocoholics.",
+      description: "Rich, moist double-chocolate muffins. An absolute treat for chocoholics.",
       price: "₹159",
-      image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c"
+      badge: "New",
+      image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500&q=80"
     }
   ];
 
-  const container = document.getElementById('productContainer');
+  const grid = document.getElementById('productsGrid');
 
-  products.forEach((product, index) => {
+  products.forEach((p, i) => {
     const card = document.createElement('div');
-    card.classList.add('card');
-    card.style.animationDelay = `${index * 0.2}s`;
-
+    card.classList.add('product-card');
+    card.style.animationDelay = `${i * 0.12}s`;
     card.innerHTML = `
-      <img src="${product.image}" alt="${product.title}" />
-      <div class="card-content">
-        <h3>${product.title}</h3>
-        <p>${product.description}</p>
-        <div class="price">${product.price}</div>
+      <div class="product-img-wrap">
+        <img src="${p.image}" alt="${p.title}" loading="lazy" />
+        ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
+      </div>
+      <div class="product-body">
+        <h3>${p.title}</h3>
+        <p>${p.description}</p>
+        <div class="product-footer">
+          <span class="product-price">${p.price}</span>
+          <a href="#how-to-order" class="product-order-btn">Order Now</a>
+        </div>
       </div>
     `;
+    grid.appendChild(card);
+  });
 
-    container.appendChild(card);
+  // ── Intersection Observer for product cards ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.product-card').forEach(c => observer.observe(c));
+
+  // ── Hamburger menu ──
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // ── Contact form → redirect to WhatsApp ──
+  document.getElementById('orderForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const item = document.getElementById('item').value;
+    const message = document.getElementById('message').value.trim();
+
+    if (!name || !phone || !item) {
+      alert('Please fill in your name, phone number, and item selection.');
+      return;
+    }
+
+    const text = `Hi! I'd like to order from Bakersmom 🍪\n\nName: ${name}\nPhone: ${phone}\nItem: ${item}${message ? '\nDetails: ' + message : ''}`;
+    const waUrl = `https://wa.me/917827154443?text=${encodeURIComponent(text)}`;
+    window.open(waUrl, '_blank');
+
+    document.getElementById('formSuccess').style.display = 'block';
+    this.reset();
   });
 </script>
 
