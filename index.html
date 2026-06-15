@@ -1285,7 +1285,9 @@
           <p>${p.description}</p>
           <div class="product-footer">
             <span class="product-price">${p.price}</span>
-            <button class="product-order-btn" onclick="addToCart('${p.title.replace(/'/g, "\\'")}')">+ Add</button>
+            <div class="card-action" data-title="${p.title}">
+              <button class="product-order-btn" data-add="${p.title}">+ Add</button>
+            </div>
           </div>
         </div>
       `;
@@ -1299,6 +1301,16 @@
 
   renderProducts('all');
 
+  // ── Grid click delegation (Add / card +/-) ──
+  grid.addEventListener('click', (e) => {
+    const addBtn = e.target.closest('[data-add]');
+    if (addBtn) { addToCart(addBtn.dataset.add); return; }
+    const incBtn = e.target.closest('[data-inc]');
+    if (incBtn) { updateQty(incBtn.dataset.inc, 1); return; }
+    const decBtn = e.target.closest('[data-dec]');
+    if (decBtn) { updateQty(decBtn.dataset.dec, -1); return; }
+  });
+
   // ── Category filter tabs ──
   document.getElementById('filterTabs').addEventListener('click', (e) => {
     const btn = e.target.closest('.filter-tab');
@@ -1306,6 +1318,7 @@
     document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
     renderProducts(btn.dataset.filter);
+    updateCardBtns();
   });
 
   // ── Cart state ──
@@ -1315,13 +1328,11 @@
     const product = products.find(p => p.title === title);
     if (!product) return;
     const existing = cart.find(c => c.title === title);
-    if (existing) {
-      existing.qty++;
-    } else {
+    if (existing) { existing.qty++; } else {
       cart.push({ title: product.title, price: product.price, cartPrice: product.cartPrice, image: product.image, qty: 1 });
     }
     updateCartUI();
-    showToast(`${product.title} added!`);
+    showToast('Added to cart!');
   }
 
   function updateQty(title, delta) {
@@ -1332,27 +1343,43 @@
     updateCartUI();
   }
 
+  function updateCardBtns() {
+    document.querySelectorAll('.card-action').forEach(el => {
+      const title = el.dataset.title;
+      const item = cart.find(c => c.title === title);
+      if (item) {
+        el.innerHTML = `
+          <div class="qty-controls">
+            <button class="qty-btn" data-dec="${title}">−</button>
+            <span class="qty-num">${item.qty}</span>
+            <button class="qty-btn" data-inc="${title}">+</button>
+          </div>`;
+      } else {
+        el.innerHTML = `<button class="product-order-btn" data-add="${title}">+ Add</button>`;
+      }
+    });
+  }
+
   function updateCartUI() {
     const totalItems = cart.reduce((s, c) => s + c.qty, 0);
     const totalPrice = cart.reduce((s, c) => s + c.cartPrice * c.qty, 0);
 
     const fab = document.getElementById('cartFab');
-    const countEl = document.getElementById('cartCount');
     fab.classList.toggle('hidden', totalItems === 0);
-    countEl.textContent = totalItems;
+    document.getElementById('cartCount').textContent = totalItems;
 
     const itemsEl = document.getElementById('cartItems');
     const footerEl = document.getElementById('cartFooter');
-    const totalEl = document.getElementById('cartTotal');
 
     if (cart.length === 0) {
       itemsEl.innerHTML = '<div class="cart-empty"><span>🛒</span><p>Your cart is empty.<br>Add items from the menu!</p></div>';
       footerEl.style.display = 'none';
+      updateCardBtns();
       return;
     }
 
     footerEl.style.display = 'block';
-    totalEl.textContent = '₹' + totalPrice.toLocaleString('en-IN');
+    document.getElementById('cartTotal').textContent = '₹' + totalPrice.toLocaleString('en-IN');
 
     itemsEl.innerHTML = cart.map(item => `
       <div class="cart-item">
@@ -1362,12 +1389,14 @@
           <div class="cart-item-price">${item.price}</div>
         </div>
         <div class="qty-controls">
-          <button class="qty-btn" onclick="updateQty('${item.title.replace(/'/g, "\\'")}', -1)">−</button>
+          <button class="qty-btn" data-panel-dec="${item.title}">−</button>
           <span class="qty-num">${item.qty}</span>
-          <button class="qty-btn" onclick="updateQty('${item.title.replace(/'/g, "\\'")}', 1)">+</button>
+          <button class="qty-btn" data-panel-inc="${item.title}">+</button>
         </div>
       </div>
     `).join('');
+
+    updateCardBtns();
   }
 
   function openCart() {
@@ -1394,6 +1423,14 @@
   document.getElementById('cartFab').addEventListener('click', openCart);
   document.getElementById('cartClose').addEventListener('click', closeCart);
   document.getElementById('cartOverlay').addEventListener('click', closeCart);
+
+  // Cart panel qty delegation
+  document.getElementById('cartItems').addEventListener('click', (e) => {
+    const dec = e.target.closest('[data-panel-dec]');
+    if (dec) { updateQty(dec.dataset.panelDec, -1); return; }
+    const inc = e.target.closest('[data-panel-inc]');
+    if (inc) { updateQty(inc.dataset.panelInc, 1); return; }
+  });
 
   document.getElementById('sendOrderBtn').addEventListener('click', () => {
     const name = document.getElementById('cartName').value.trim();
