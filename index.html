@@ -367,8 +367,16 @@
       max-width: 1200px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 28px;
+    }
+
+    @media (max-width: 960px) {
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 580px) {
+      .products-grid { grid-template-columns: 1fr; }
     }
 
     .product-card {
@@ -943,7 +951,7 @@
             <option>Biscoff Cheesecake</option>
             <option>Blueberry Cheesecake</option>
             <option>Naan Khatai</option>
-            <option>Almond Cookies</option>
+            <option>Wheat Almond Cookies</option>
             <option>Ragi Hazelnut Cookies</option>
             <option>Chocolate Muffins</option>
             <option>Vanilla Cupcakes</option>
@@ -997,7 +1005,7 @@
     {
       title: "Biscoff Cheesecake",
       description: "Creamy no-bake cheesecake on a Lotus Biscoff crust, topped with Biscoff spread and a whole cookie.",
-      price: "₹499",
+      price: "₹1,000",
       badge: "Best Seller",
       category: "Cheesecakes",
       image: "images/biscoff-cheesecake.jpg"
@@ -1005,31 +1013,31 @@
     {
       title: "Blueberry Cheesecake",
       description: "Velvety smooth cheesecake on a buttery biscuit base, topped with a luscious blueberry compote.",
-      price: "₹499",
+      price: "₹1,000",
       badge: "",
       category: "Cheesecakes",
       image: "images/blueberry-cheesecake.jpg"
     },
     {
       title: "Naan Khatai",
-      description: "Traditional Indian shortbread cookies with a melt-in-your-mouth texture, topped with a whole almond.",
-      price: "₹199",
+      description: "Traditional Indian shortbread cookies with a melt-in-your-mouth texture, topped with a whole almond. 220gm pack.",
+      price: "₹250",
       badge: "",
       category: "Cookies",
       image: "images/naan-khatai.jpg"
     },
     {
-      title: "Almond Cookies",
-      description: "Crispy, thin cookies packed with flaked almonds — a perfect companion to your evening chai.",
-      price: "₹199",
+      title: "Wheat Almond Cookies",
+      description: "Crispy, wholesome wheat cookies packed with flaked almonds — a perfect companion to your evening chai. 150gm pack.",
+      price: "₹250",
       badge: "",
       category: "Cookies",
       image: "images/almond-cookies.jpg"
     },
     {
       title: "Ragi Hazelnut Cookies",
-      description: "Wholesome ragi (finger millet) cookies with hazelnuts — a nutty, guilt-free indulgence.",
-      price: "₹219",
+      description: "Wholesome ragi (finger millet) cookies with hazelnuts — a nutty, guilt-free indulgence. 220gm pack.",
+      price: "₹250",
       badge: "Healthy Pick",
       category: "Cookies",
       image: "images/ragi-hazelnut-cookies.jpg"
@@ -1037,23 +1045,23 @@
     {
       title: "Chocolate Muffins",
       description: "Rich, dark chocolate muffins loaded with chocolate chips — fudgy inside, crinkled on top.",
-      price: "₹159",
+      price: "₹80 each",
       badge: "",
       category: "Muffins",
       image: "images/chocolate-muffins.jpg"
     },
     {
       title: "Vanilla Cupcakes",
-      description: "Light, fluffy vanilla cupcakes with swirls of whipped cream frosting and rainbow sprinkles.",
-      price: "₹149",
+      description: "Light, fluffy vanilla cupcakes. Available without frosting (₹70) or with whipped cream & sprinkles (₹80).",
+      price: "₹70 – ₹80",
       badge: "",
       category: "Cupcakes",
       image: "images/vanilla-cupcakes.jpg"
     },
     {
       title: "Chocolate Cupcakes",
-      description: "Decadent chocolate cupcakes topped with rich dark chocolate ganache frosting. Pure indulgence.",
-      price: "₹169",
+      description: "Decadent chocolate cupcakes. Available without frosting (₹70) or with rich chocolate ganache frosting (₹80).",
+      price: "₹70 – ₹80",
       badge: "Fan Favourite",
       category: "Cupcakes",
       image: "images/chocolate-cupcakes.jpg"
@@ -1061,15 +1069,15 @@
     {
       title: "Nutella Brownies",
       description: "Fudgy, dense chocolate brownies drizzled generously with Nutella — impossible to stop at one.",
-      price: "₹249",
+      price: "₹80 each",
       badge: "",
       category: "Brownies",
       image: "images/nutella-brownies.jpg"
     },
     {
       title: "Marble Cake",
-      description: "Classic marble cake with vanilla & chocolate swirls. Available plain or with rich chocolate ganache.",
-      price: "₹449",
+      description: "Classic 500gm marble cake with vanilla & chocolate swirls. Available plain or topped with rich chocolate ganache.",
+      price: "from ₹550",
       badge: "Customisable",
       category: "Cakes",
       image: "images/marble-cake.jpg"
