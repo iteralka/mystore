@@ -42,11 +42,15 @@
     }
 
     .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--primary);
+      display: flex;
+      align-items: center;
       text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
     }
 
     .nav-links {
@@ -910,7 +914,7 @@
 
 <!-- NAV -->
 <nav id="navbar">
-  <a href="#home" class="nav-logo">Bakersmom 🍪</a>
+  <a href="#home" class="nav-logo"><img src="images/logo.jpg" alt="Bakersmom" /></a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#about">Our Story</a></li>
     <li><a href="#menu">Menu</a></li>
@@ -1146,7 +1150,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Bakersmom 🍪</div>
+  <div class="footer-logo"><img src="images/logo.jpg" alt="Bakersmom" style="height:70px;width:auto;object-fit:contain;background:white;padding:8px 20px;border-radius:14px;" /></div>
   <p>Homemade Cookies &amp; Cakes baked with love</p>
   <div class="footer-links">
     <a href="#home">Home</a>
