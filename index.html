@@ -336,8 +336,35 @@
     /* ── MENU ── */
     .menu { background: var(--cream); }
 
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .filter-tab {
+      background: white;
+      border: 1.5px solid var(--border);
+      color: var(--muted);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-tab:hover, .filter-tab.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
     .products-grid {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -803,6 +830,16 @@
     <h2 class="section-title">Our Signature Menu</h2>
     <p class="section-sub">Each item is baked fresh and packed with flavour. All prices are per pack unless noted.</p>
   </div>
+  <div class="filter-tabs" id="filterTabs">
+    <button class="filter-tab active" data-filter="all">All</button>
+    <button class="filter-tab" data-filter="Breads">Breads</button>
+    <button class="filter-tab" data-filter="Cheesecakes">Cheesecakes</button>
+    <button class="filter-tab" data-filter="Cookies">Cookies</button>
+    <button class="filter-tab" data-filter="Muffins">Muffins</button>
+    <button class="filter-tab" data-filter="Cupcakes">Cupcakes</button>
+    <button class="filter-tab" data-filter="Brownies">Brownies</button>
+    <button class="filter-tab" data-filter="Cakes">Cakes</button>
+  </div>
   <div class="products-grid" id="productsGrid"></div>
 </section>
 
@@ -902,10 +939,17 @@
           <label for="item">What would you like to order?</label>
           <select id="item" required>
             <option value="">— Select an item —</option>
-            <option>Chocolate Chip Cookies</option>
-            <option>Blueberry Muffins</option>
-            <option>Oatmeal Cookies</option>
+            <option>Pull Apart Garlic Bread</option>
+            <option>Biscoff Cheesecake</option>
+            <option>Blueberry Cheesecake</option>
+            <option>Naan Khatai</option>
+            <option>Almond Cookies</option>
+            <option>Ragi Hazelnut Cookies</option>
             <option>Chocolate Muffins</option>
+            <option>Vanilla Cupcakes</option>
+            <option>Chocolate Cupcakes</option>
+            <option>Nutella Brownies</option>
+            <option>Marble Cake</option>
             <option>Custom / Multiple Items</option>
           </select>
         </div>
@@ -943,64 +987,137 @@
   // ── Products data ──
   const products = [
     {
-      title: "Chocolate Chip Cookies",
-      description: "Freshly baked cookies loaded with chocolate chips. Crispy edges, chewy centre.",
-      price: "₹199",
+      title: "Pull Apart Garlic Bread",
+      description: "Soft, pull-apart bread swirled with herbs and garlic, baked to a golden crisp. Perfect for sharing.",
+      price: "₹299",
+      badge: "Savory Special",
+      category: "Breads",
+      image: "images/garlic-bread.jpg"
+    },
+    {
+      title: "Biscoff Cheesecake",
+      description: "Creamy no-bake cheesecake on a Lotus Biscoff crust, topped with Biscoff spread and a whole cookie.",
+      price: "₹499",
       badge: "Best Seller",
-      image: "https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=500&q=80"
+      category: "Cheesecakes",
+      image: "images/biscoff-cheesecake.jpg"
     },
     {
-      title: "Blueberry Muffins",
-      description: "Soft, fluffy muffins bursting with fresh blueberries and a golden top.",
-      price: "₹149",
-      badge: "Fan Favourite",
-      image: "https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?w=500&q=80"
-    },
-    {
-      title: "Oatmeal Cookies",
-      description: "Wholesome oatmeal cookies with plump raisins. Healthy never tasted this good.",
-      price: "₹179",
+      title: "Blueberry Cheesecake",
+      description: "Velvety smooth cheesecake on a buttery biscuit base, topped with a luscious blueberry compote.",
+      price: "₹499",
       badge: "",
-      image: "https://images.unsplash.com/photo-1599785209707-28d2c3c9cba2?w=500&q=80"
+      category: "Cheesecakes",
+      image: "images/blueberry-cheesecake.jpg"
+    },
+    {
+      title: "Naan Khatai",
+      description: "Traditional Indian shortbread cookies with a melt-in-your-mouth texture, topped with a whole almond.",
+      price: "₹199",
+      badge: "",
+      category: "Cookies",
+      image: "images/naan-khatai.jpg"
+    },
+    {
+      title: "Almond Cookies",
+      description: "Crispy, thin cookies packed with flaked almonds — a perfect companion to your evening chai.",
+      price: "₹199",
+      badge: "",
+      category: "Cookies",
+      image: "images/almond-cookies.jpg"
+    },
+    {
+      title: "Ragi Hazelnut Cookies",
+      description: "Wholesome ragi (finger millet) cookies with hazelnuts — a nutty, guilt-free indulgence.",
+      price: "₹219",
+      badge: "Healthy Pick",
+      category: "Cookies",
+      image: "images/ragi-hazelnut-cookies.jpg"
     },
     {
       title: "Chocolate Muffins",
-      description: "Rich, moist double-chocolate muffins. An absolute treat for chocoholics.",
+      description: "Rich, dark chocolate muffins loaded with chocolate chips — fudgy inside, crinkled on top.",
       price: "₹159",
-      badge: "New",
-      image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500&q=80"
+      badge: "",
+      category: "Muffins",
+      image: "images/chocolate-muffins.jpg"
+    },
+    {
+      title: "Vanilla Cupcakes",
+      description: "Light, fluffy vanilla cupcakes with swirls of whipped cream frosting and rainbow sprinkles.",
+      price: "₹149",
+      badge: "",
+      category: "Cupcakes",
+      image: "images/vanilla-cupcakes.jpg"
+    },
+    {
+      title: "Chocolate Cupcakes",
+      description: "Decadent chocolate cupcakes topped with rich dark chocolate ganache frosting. Pure indulgence.",
+      price: "₹169",
+      badge: "Fan Favourite",
+      category: "Cupcakes",
+      image: "images/chocolate-cupcakes.jpg"
+    },
+    {
+      title: "Nutella Brownies",
+      description: "Fudgy, dense chocolate brownies drizzled generously with Nutella — impossible to stop at one.",
+      price: "₹249",
+      badge: "",
+      category: "Brownies",
+      image: "images/nutella-brownies.jpg"
+    },
+    {
+      title: "Marble Cake",
+      description: "Classic marble cake with vanilla & chocolate swirls. Available plain or with rich chocolate ganache.",
+      price: "₹449",
+      badge: "Customisable",
+      category: "Cakes",
+      image: "images/marble-cake.jpg"
     }
   ];
 
   const grid = document.getElementById('productsGrid');
 
-  products.forEach((p, i) => {
-    const card = document.createElement('div');
-    card.classList.add('product-card');
-    card.style.animationDelay = `${i * 0.12}s`;
-    card.innerHTML = `
-      <div class="product-img-wrap">
-        <img src="${p.image}" alt="${p.title}" loading="lazy" />
-        ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
-      </div>
-      <div class="product-body">
-        <h3>${p.title}</h3>
-        <p>${p.description}</p>
-        <div class="product-footer">
-          <span class="product-price">${p.price}</span>
-          <a href="#how-to-order" class="product-order-btn">Order Now</a>
+  function renderProducts(filter) {
+    grid.innerHTML = '';
+    const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+    filtered.forEach((p, i) => {
+      const card = document.createElement('div');
+      card.classList.add('product-card');
+      card.style.animationDelay = `${i * 0.08}s`;
+      card.dataset.category = p.category;
+      card.innerHTML = `
+        <div class="product-img-wrap">
+          <img src="${p.image}" alt="${p.title}" loading="lazy" />
+          ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
         </div>
-      </div>
-    `;
-    grid.appendChild(card);
+        <div class="product-body">
+          <h3>${p.title}</h3>
+          <p>${p.description}</p>
+          <div class="product-footer">
+            <span class="product-price">${p.price}</span>
+            <a href="#how-to-order" class="product-order-btn">Order Now</a>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.product-card').forEach(c => observer.observe(c));
+  }
+
+  renderProducts('all');
+
+  // ── Category filter tabs ──
+  document.getElementById('filterTabs').addEventListener('click', (e) => {
+    const btn = e.target.closest('.filter-tab');
+    if (!btn) return;
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    renderProducts(btn.dataset.filter);
   });
-
-  // ── Intersection Observer for product cards ──
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, { threshold: 0.15 });
-
-  document.querySelectorAll('.product-card').forEach(c => observer.observe(c));
 
   // ── Hamburger menu ──
   const hamburger = document.getElementById('hamburger');
