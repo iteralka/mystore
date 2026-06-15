@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 72">
+  <defs>
+    <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e8756a"/>
+      <stop offset="100%" stop-color="#f5a49f"/>
+    </linearGradient>
+    <linearGradient id="creamGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f7c59f"/>
+      <stop offset="100%" stop-color="#f0a080"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ── Cupcake icon ── -->
+
+  <!-- Wrapper / base (trapezoid) -->
+  <path d="M15 62 Q15 66 20 66 L52 66 Q57 66 57 62 L51 40 L21 40 Z" fill="url(#pinkGrad)"/>
+
+  <!-- Wrapper vertical stripe details -->
+  <line x1="29" y1="40" x2="25" y2="66" stroke="white" stroke-width="1.3" stroke-linecap="round" opacity="0.3"/>
+  <line x1="36" y1="40" x2="36" y2="66" stroke="white" stroke-width="1.3" stroke-linecap="round" opacity="0.3"/>
+  <line x1="43" y1="40" x2="47" y2="66" stroke="white" stroke-width="1.3" stroke-linecap="round" opacity="0.3"/>
+
+  <!-- Frosting dome -->
+  <path d="M19 42 Q17 22 36 20 Q55 22 53 42 Z" fill="url(#creamGrad)"/>
+
+  <!-- Frosting highlight gloss -->
+  <path d="M26 38 Q25 26 36 24 Q44 26 45 35" fill="white" opacity="0.18"/>
+
+  <!-- Swirl peak -->
+  <path d="M36 20 C31 17 27 13 29.5 8.5 C31 6 34 5.5 36 7.5 C38 5.5 41 6 42.5 8.5 C45 13 41 17 36 20Z" fill="url(#pinkGrad)"/>
+
+  <!-- Heart on swirl -->
+  <path d="M33.8 9 Q33.8 6.5 36 7.6 Q38.2 6.5 38.2 9 Q38.2 11.5 36 13.5 Q33.8 11.5 33.8 9Z" fill="white" opacity="0.92"/>
+
+  <!-- ── Brand name ── -->
+  <text x="76" y="43"
+        font-family="Georgia, 'Playfair Display', 'Times New Roman', serif"
+        font-size="33"
+        font-weight="bold"
+        fill="url(#pinkGrad)"
+        letter-spacing="0.5">Bakersmom</text>
+
+  <!-- Thin accent line under name -->
+  <line x1="76" y1="50" x2="327" y2="50" stroke="#f5a49f" stroke-width="0.8" opacity="0.55"/>
+
+  <!-- Tagline -->
+  <text x="77" y="63"
+        font-family="Arial, 'Poppins', sans-serif"
+        font-size="10.5"
+        fill="#b07878"
+        letter-spacing="2.8"
+        font-weight="400">MADE WITH LOVE AT HOME</text>
+</svg>
